@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  nodejs:
+    build: .
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/tybadb
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+      - typescript
+  typescript:
+    image: sandrokeil/typescript
+    command: tsc
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
